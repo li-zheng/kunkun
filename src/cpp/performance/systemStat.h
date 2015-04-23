@@ -28,6 +28,7 @@ class SystemStat {
  public:
   // The return value is n%.
   int getCPUUsage();
+
 };
 
 #endif
