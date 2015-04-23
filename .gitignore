@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+
+
+# VS projects files
+*.sln
+*.suo
+*.vcxproj
+*.user
+*.filters
