@@ -2,6 +2,7 @@
 #include "../performance/systemStat.h"
 #include <iostream>
 #include "../url/url_parser.h"
+#include "../url/url_parser.hpp"
 
 using namespace std;
 
@@ -15,25 +16,28 @@ TEST(LibTest, CPUUsageTest) {
 }
 
 TEST(LibTest, UrlParserTest){
-  struct parsed_url* url = parse_url("http://www.sina.com");
+  using namespace http;
   
-  ASSERT_FALSE(NULL == url);
-
-  string host(url->host);
+  string uri = string("http://www.sina.com");
+  struct url url = ParseHttpUrl(uri);
+  
+  string host(url.host);
   ASSERT_EQ("www.sina.com", host);
 
+  uri = string("www.sina.com/1");
+  url = ParseHttpUrl(uri);
 
-  url = parse_url("http://www.sina.com/1");
-
-  ASSERT_FALSE(NULL == url);
-
-  host = (url->host);
+  host = (url.host);
   ASSERT_EQ("www.sina.com", host);
 
-  url = parse_url("http://www.sina.com/abc/");
+  uri = string("www.sina.com/1\n");
+  url = ParseHttpUrl(uri);
 
-  ASSERT_FALSE(NULL == url);
-
-  host = (url->host);
+  host = (url.host);
   ASSERT_EQ("www.sina.com", host);
+
+  uri = string("www.sina.com/1\n");
+  url = ParseHttpUrl(uri);
+
+  ASSERT_EQ("sina.com", url.domain);
 }
