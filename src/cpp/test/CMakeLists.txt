@@ -1,7 +1,9 @@
 include_directories(${gtest_SOURCE_DIR}/include)
+
 set(test_sources
  libTest.cpp
  ../performance/systemStat.cpp
+ ../url/url_parser.c
 )
 
 add_executable(all_tests ${test_sources})
